@@ -12,6 +12,7 @@ class Dice {
         int getNumber();
         void setNumber(int);
         void roll();
+        int customRoll(int, int);
 };
 
 Dice::Dice() {
@@ -28,6 +29,10 @@ void Dice::setNumber(int num) {
     number = num;
 }
 
-void Dice::roll() {
-    number = 1 + rand()%6;
+void Dice::roll() { // Choose a random number from 0 to 5 (0:6) and adds 1, making it a random number from 1 to 6
+    number = 1 + rand()%6; // Sets the random value to the Dice::number variable
+}
+
+int Dice::customRoll(int min, int max) { // Choose a random number from a specified range and returns it
+    return min + rand()%max;      
 }

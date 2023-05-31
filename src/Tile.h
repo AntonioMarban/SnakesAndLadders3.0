@@ -15,6 +15,8 @@ class Tile {
         // Setters
         void setTileType(char);
         void setTileNumber(int);
+
+        void printTile();
 };
 
 Tile::~Tile() {}
@@ -32,4 +34,8 @@ void Tile::setTileType(char tileType) {
 
 void Tile::setTileNumber(int tileNumber) {
     this->tileNumber = tileNumber;
+}
+
+void Tile::printTile() {
+    cout << tileNumber << tileType << endl;
 }
