@@ -1,0 +1,26 @@
+Casilla: 
+int Número de casilla
+char Tipo de casilla (N L S)
+
+
+Escalera
+int Premio + 3
+avazarJugador()
+
+
+Serpiente
+int Penalizacion - 3 
+retrocederJugador()
+
+
+
+Tablero:
+vector<Casilla> = {Serpient, Ealera, Normal}
+
+
+Partida (MyGame)
+vector<Jugador> Jugadores = {Peronsa, persona}
+dado Dado
+tablero Tablero
+
+
