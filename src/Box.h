@@ -3,19 +3,21 @@ using namespace std;
 #pragma once
 
 class Box {
-  char boxType;
-  int boxNum;
-public:
-    Box() {};
-    Box(const char &boxType,const int &boxNum) : boxType(boxType), boxNum(boxNum){};
-    ~Box() {};
-    // Getters
-    char getboxType();
-    int getboxNum();
-    // Setters
-    void setboxType(char);
-    void setboxNum(int);
+    char boxType;
+    int boxNum;
+    public:
+        Box() {};
+        Box(const char &boxType,const int &boxNum) : boxType(boxType), boxNum(boxNum){};
+        ~Box();
+        // Getters
+        char getboxType();
+        int getboxNum();
+        // Setters
+        void setboxType(char);
+        void setboxNum(int);
 };
+
+Box::~Box() {}
 
 char Box::getboxType() {
     return boxType;

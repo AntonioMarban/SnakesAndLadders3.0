@@ -2,6 +2,8 @@
 #include <iostream>
 #include <vector>
 #include "Box.h"
+#include "Ladder.h"
+#include "Snake.h"
 using namespace std;
 
 class Board {
