@@ -1,11 +1,11 @@
 #include <iostream>
-#include "Box.h"
+#include "Tile.h"
 using namespace std;
 #pragma once
 
-class Snake : public Box {
+class Snake : public Tile {
     public:
         Snake() = default;
-        Snake(const char &boxType, const int &boxNum) : Box(boxType, boxNum) {}
+        Snake(const char &tileType, const int &tileNumber) : Tile(tileType, tileNumber) {}
         ~Snake() {}
 };

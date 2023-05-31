@@ -1,31 +1,31 @@
 #pragma once
 #include <iostream>
 #include <vector>
-#include "Box.h"
+#include "Tile.h"
 #include "Ladder.h"
 #include "Snake.h"
 using namespace std;
 
 class Board {
     int numberOfBoxes;
-    vector<Box*> boxes; // vector con apuntadores tipo box
+    vector<Tile*> boxes; // vector con apuntadores tipo box
     
     public:
         Board() = default; // constructor por omisión
-        Board(const int&, const vector<Box*>); // constructor por argumentos
+        Board(const int&, const vector<Tile*>); // constructor por argumentos
         ~Board();
 
         int getNumberOfBoxes();
-        vector<Box*> getBoxes();
+        vector<Tile*> getBoxes();
 
         void setNumberOfBoxes(int);
-        void setBoxes(vector<Box*>);
+        void setBoxes(vector<Tile*>);
 
         void printBoard();
         
 };
 
-Board::Board(const int& numberOfBoxes, const vector<Box*> boxes) {
+Board::Board(const int& numberOfBoxes, const vector<Tile*> boxes) {
 
     this->numberOfBoxes = numberOfBoxes;
     this->boxes = boxes;
@@ -37,7 +37,7 @@ int Board::getNumberOfBoxes() {
     return numberOfBoxes;
 }
 
-vector<Box*> Board::getBoxes() {
+vector<Tile*> Board::getBoxes() {
     return boxes;
 }
 
@@ -45,7 +45,7 @@ void Board::setNumberOfBoxes(int numberOfBoxes) {
     this->numberOfBoxes = numberOfBoxes;
 }
 
-void Board::setBoxes(vector<Box*> boxes) {
+void Board::setBoxes(vector<Tile*> boxes) {
     this->boxes = boxes;
 }
 

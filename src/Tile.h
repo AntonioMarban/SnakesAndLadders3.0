@@ -1,0 +1,35 @@
+#include <iostream>
+using namespace std;
+#pragma once
+
+class Tile {
+    char tileType;
+    int tileNumber;
+    public:
+        Tile() {};
+        Tile(const char &tileType,const int &tileNumber) : tileType(tileType), tileNumber(tileNumber){};
+        ~Tile();
+        // Getters
+        char getTileType();
+        int getTileNumber();
+        // Setters
+        void setTileType(char);
+        void setTileNumber(int);
+};
+
+Tile::~Tile() {}
+
+char Tile::getTileType() {
+    return tileType;
+}
+
+int Tile::getTileNumber() {
+    return tileNumber;
+}
+void Tile::setTileType(char tileType) {
+    this->tileType = tileType;
+}
+
+void Tile::setTileNumber(int tileNumber) {
+    this->tileNumber = tileNumber;
+}

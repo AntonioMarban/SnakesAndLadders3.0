@@ -1,12 +1,12 @@
 #include <iostream>
-#include "Box.h"
+#include "Tile.h"
 using namespace std;
 #pragma once
 
-class Ladder : public Box {
+class Ladder : public Tile {
     public:
         Ladder() = default;
-        Ladder(const char &boxType, const int &boxNum) : Box(boxType, boxNum) {}
+        Ladder(const char &tileType, const int &tileNumber) : Tile(tileType, tileNumber) {}
         ~Ladder() {}
 };
 
