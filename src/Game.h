@@ -11,13 +11,13 @@ using namespace std;
 #pragma once
 
 class Game {
-    const int T = 30; // Number of tiles
+    const int C = 30; // Number of tiles
     const int S = 3; // Number of snake tiles
     const int L = 3; // Number of ladder tiles
     const int P = 3; // Snake penalty 
     const int R = 3; // Ladder reward
     const int PL = 2; // Number of players
-    const int MT = 100; // Maximum number of turns
+    const int T = 100; // Maximum number of turns
     const char GT = 'M'; // Game Type: 'A' for automatic / 'M' for manual
 
     Dice dice;

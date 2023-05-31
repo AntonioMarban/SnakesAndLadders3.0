@@ -7,46 +7,66 @@
 using namespace std;
 
 class Board {
-    int numberOfBoxes;
-    vector<Tile*> boxes; // vector con apuntadores tipo box
+    int numberOfTiles;
+    int numberOfSnakes;
+    int numberOfLadders;
+    vector<Tile*> tiles; // vector con apuntadores tipo box
     
     public:
         Board() = default; // constructor por omisión
-        Board(const int&, const vector<Tile*>); // constructor por argumentos
+        Board(const int&, const int&, const int&, const vector<Tile*>); // constructor por argumentos
         ~Board();
 
-        int getNumberOfBoxes();
-        vector<Tile*> getBoxes();
+        int getNumberOfTiles();
+        int getNumberOfSnakes();
+        int getNumberOfLadders();
+        vector<Tile*> getTiles();
 
-        void setNumberOfBoxes(int);
-        void setBoxes(vector<Tile*>);
+        void setNumberOfTiles(int);
+        void setNumberOfSnakes(int);
+        void setNumberOfLadders(int);
+        void setTiles(vector<Tile*>);
 
         void printBoard();
         
 };
 
-Board::Board(const int& numberOfBoxes, const vector<Tile*> boxes) {
+Board::Board(const int& numberOfTiles, const int& numberOfSnakes, const int& numberOFLadders, const vector<Tile*> tiles) {
 
-    this->numberOfBoxes = numberOfBoxes;
-    this->boxes = boxes;
+    this->numberOfTiles = numberOfTiles;
+    this->numberOfSnakes = numberOfSnakes;
+    this->numberOfLadders = numberOfLadders;
+    this->tiles = tiles;
 }
 
 Board::~Board() {}
 
-int Board::getNumberOfBoxes() {
-    return numberOfBoxes;
+int Board::getNumberOfTiles() {
+    return numberOfTiles;
+}
+int Board::getNumberOfSnakes() {
+    return numberOfSnakes;
+}
+int Board::getNumberOfLadders() {
+    return numberOfLadders;
 }
 
-vector<Tile*> Board::getBoxes() {
-    return boxes;
+vector<Tile*> Board::getTiles() {
+    return tiles;
 }
 
-void Board::setNumberOfBoxes(int numberOfBoxes) {
-    this->numberOfBoxes = numberOfBoxes;
+void Board::setNumberOfTiles(int numberOfTiles) {
+    this->numberOfTiles = numberOfTiles;
+}
+void Board::setNumberOfSnakes(int numberOfSnakes) {
+    this->numberOfSnakes = numberOfTiles;
+}
+void Board::setNumberOfLadders(int numberOfLadders) {
+    this->numberOfLadders = numberOfLadders;
 }
 
-void Board::setBoxes(vector<Tile*> boxes) {
-    this->boxes = boxes;
+void Board::setTiles(vector<Tile*> tiles) {
+    this->tiles = tiles;
 }
 
 
