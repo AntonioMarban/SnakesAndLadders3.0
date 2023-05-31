@@ -9,8 +9,7 @@ class Player : public Person // la clase Player hereda con ambito publico de la 
     int position;
 public:
     Player() {};
-    Player(const string &name) : Person(name){}
-    Player(const int &playerNum, const int &position) : playerNum(playerNum), position(position) {}; 
+    Player(const string &name, const int &playerNum, const int &position) : Person(name), playerNum(playerNum), position(position) {}; 
     ~Player() {};
     // Getters
     int getPlayerNum();

@@ -44,7 +44,6 @@ Board::Board(const int& numberOfTiles, const int& numberOfSnakes, const int& num
     this->numberOfLadders = numberOfLadders;
     this->penalty = penalty;
     this->reward = reward;
-
     srand(time(NULL));
     for (int i = 0; i < numberOfTiles; i++) {
         tiles.push_back(new Tile('N', i));
