@@ -5,7 +5,7 @@
 #include "Box.h"
 #include "Ladder.h"
 #include "Snake.h"
-// #include "Player.h"
+#include "Player.h"
 #include "Dice.h"
 using namespace std;
 #pragma once
@@ -13,19 +13,21 @@ using namespace std;
 class Game {
     Dice dice;
     Board board;
-    // vector<Player> players;
+    vector<Player> players;
     public:
         Game();
         ~Game();
         void start();
 };
 
-Game::Game() {}
+Game::Game() {
+}
 
 Game::~Game() {}
 
 void Game::start() {
     srand(time(NULL));
     dice.roll();
-    cout << dice.getNumber() << endl;    
+    cout << dice.getNumber() << endl;  
+    cout << players.size() << players.capacity() << endl;  
 }
