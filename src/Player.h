@@ -9,7 +9,7 @@ class Player : public Person // la clase Player hereda con ambito publico de la 
     int position;
 public:
     Player() {};
-    Player(const string &name, const int &playerNum, const int &position) : Person(name), playerNum(playerNum), position(position) {}; 
+    Player(const string &name, const int &playerNum) : Person(name), playerNum(playerNum) {position = 0;} 
     ~Player() {};
     // Getters
     int getPlayerNum();
@@ -17,6 +17,7 @@ public:
     // Setters
     void setPlayerNum(int);
     void setPosition(int);
+    void printPlayer();
 };
 
 int Player::getPlayerNum() {
@@ -33,4 +34,8 @@ int Player::getPosition() {
 
 void Player::setPosition(int _position) {
     position = _position;
+}
+
+void Player::printPlayer() {
+    cout << playerNum << position << endl;
 }
