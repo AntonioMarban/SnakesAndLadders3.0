@@ -121,6 +121,7 @@ void Game::playTurn(Board currentBoard) {
 
 
 void Game::start() {
+    askForParameters();
     if (!validGame()) {return;}
     srand(time(NULL));
     Board board(C, S, L, P, R); // Tile number, snakes number, ladders number, penalty, reward
