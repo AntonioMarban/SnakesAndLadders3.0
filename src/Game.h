@@ -11,14 +11,16 @@ using namespace std;
 #pragma once
 
 class Game {
-    const int C = 20; // Number of tiles (minimum of 5)
-    const int S = 1; // Number of snake tiles
-    const int L = 1; // Number of ladder tiles
-    const int P = 3; // Snake penalty 
-    const int R = 3; // Ladder reward
-    const int PL = 2; // Number of players
-    const int T = 100; // Maximum number of turns
-    const char GT = 'M'; // Game Type: 'A' for automatic / 'M' for manual
+
+    // Default values
+    int C = 20; // Number of tiles (minimum of 5)
+    int S = 1; // Number of snake tiles
+    int L = 1; // Number of ladder tiles
+    int P = 3; // Snake penalty 
+    int R = 3; // Ladder reward
+    int PL = 2; // Number of players
+    int T = 100; // Maximum number of turns
+    char GM= 'A'; // Game mode: 'A' for automatic / 'M' for manual
 
     int turnNumber = 0;
     bool ended = false;
@@ -30,6 +32,7 @@ class Game {
         Game();
         ~Game();
         void start();
+        void askForParameters();
         bool validGame();
         void playTurn(Board);
 };
@@ -39,12 +42,33 @@ Game::Game() {
 
 Game::~Game() {}
 
+void Game::askForParameters() {
+    cout << "Please indicate the following..." << endl;
+    cout << "Number of tiles: ";
+    cin >> C;
+    cout << "Number of snake tiles: ";
+    cin >> S;
+    cout << "Number of ladder tiles: ";
+    cin >> L;
+    cout << "Penalty for landing on a snake tile: ";
+    cin >> P;
+    cout << "Penalty for landing on a ladder tile: ";
+    cin >> R;
+    cout << "Number of players: ";
+    cin >> PL;
+    cout << "Maximum number of turns: ";
+    cin >> T;
+    cout << "Game mode ('A' for automatic or 'M' for manual): ";
+    cin >> GM;
+}
+
 bool Game::validGame() {
     if ((S + L) > (C - (P + R + 1))) { // Number of special tiles > Number of available legal tiles (Total - Reward - Penalty - 1)
         cout << "Invalid snakes and ladders number; they cannot exceed the number of tiles and they cannot be placed in illegal tiles (start, end, or any other tile that could possibly make the player step out of the board when penalized/rewarded)" << endl;
         return false;
     }
     else {
+        cout << "Valid game" << endl;
         return true;
     }
 }
@@ -55,30 +79,48 @@ void Game::playTurn(Board currentBoard) {
     Player &playing = players[turnNumber%PL];
 
     playing.setPosition(playing.getPosition() + rolled); // Moves the player the number of tiles indicated by the dice roll
-
+    if (playing.getPosition() >= C) {
+        playing.setPosition(C);
+        ended = true;
+    }
+    
+    cout << "checador1" << endl;
 
     Tile * currentTile = currentBoard.getTiles()[playing.getPosition()]; // Pointer to the tile landed on
     char currentTileType = currentTile->getTileType(); // Saves type of the tile landed on
 
+    cout << "checador2" << endl;
+
     if (currentTileType == 'N' ) { // Landed on a normal tile
-        if (playing.getPosition() > C) { // If player reaches the last tile
-            cout << turnNumber + 1 << " " << playing.getPlayerNum() << " " << playing.getPosition() - rolled + 1 << " " <<  rolled << " " << currentTileType << " " << C << endl;
-            cout << "Player " << playing.getPlayerNum() << " is the winner!!!" << endl; // Game Over by victory
-            ended = true; // Ends the game
-        }
-        else {
-            cout << turnNumber + 1 << " " << playing.getPlayerNum() << " " << playing.getPosition() - rolled + 1<< " " <<  rolled << " " << currentTileType << " " << playing.getPosition() + 1 << endl; // Normal turn output
-        }        
+        cout << turnNumber + 1 << " " << playing.getPlayerNum() << " " << playing.getPosition() - rolled + 1 << " " <<  rolled << " " << currentTileType << " " << playing.getPosition() + 1 << endl; // Normal turn output   
+        cout << "checadorN" << endl;   
     } 
     else if (currentTileType == 'S') { // Landed on a snake
         cout << turnNumber + 1 << " " << playing.getPlayerNum() << " " << playing.getPosition() - rolled + 1 << " " << rolled << " " << currentTileType << " " << playing.getPosition() - P + 1 << endl;
         playing.setPosition(playing.getPosition() - P); // Makes the player move P tiles back
+        cout << "checadorS" << endl;
     }
     else { // Landed on a ladder
         cout << turnNumber + 1 << " " << playing.getPlayerNum() << " " << playing.getPosition() - rolled + 1 << " " << rolled << " " << currentTileType << " " << playing.getPosition() + R + 1 << endl;
         playing.setPosition(playing.getPosition() + R); // Makes the player move R tiles forward
+        cout << "checadorL" << endl;
     }
-    
+
+    cout << "checador3" << endl;
+
+    turnNumber++;
+    if (ended) {
+        cout << "Player " << playing.getPlayerNum() << " is the winner!!!" << endl; // Game Over by victory
+    }
+
+    cout << "checador4" << endl;
+
+    if (turnNumber >= T) {
+        cout << "Maximum number of turns reached!!!" << endl; // Game Over by max turns
+        ended = true;
+    }
+
+    cout << "checador5" << endl;
 }
 
 
@@ -92,5 +134,30 @@ void Game::start() {
         cin >> nombre;
         players.push_back(Player(nombre, i + 1));
     }
-    playTurn(board);
+
+    if (GM == 'M') {
+        char typed;
+        cout << "Welcome to Snakes & Ladders!\nType 'C' to continue to next turn, or 'E' to end the game:" << endl;
+        while (!ended) {
+            cin >> typed;
+            while(typed != 'C' && typed != 'E') {
+                cout << "Invalid option, please press C to continue next turn or E to end the game." << endl; 
+                cin >> typed;  
+            }
+            if (typed == 'C') {
+                playTurn(board);
+            }
+            else {
+                cout << "Thanks for playing!!!" << endl;
+                break;
+            }
+        }
+        cout << "--GAME OVER--" << endl;
+    }
+    else {
+        while(!ended) {
+            playTurn(board);
+        }
+        cout << "--GAME OVER--" << endl;
+    }
 }

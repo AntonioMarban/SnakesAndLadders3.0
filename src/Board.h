@@ -68,10 +68,6 @@ Board::Board(const int& numberOfTiles, const int& numberOfSnakes, const int& num
         tiles.erase(tiles.begin() + tile); // Removes the normal tile
         tiles.insert(tiles.begin() + tile, new Ladder('L', tile)); // Inserts the ladder tile where the normal tile used to be
     }
-    
-    for (int i = 0; i < numberOfTiles; i++) {
-        tiles[i]->printTile();   
-    }
 }
 
 Board::Board(const int& numberOfTiles, const int& numberOfSnakes, const int& numberOfLadders, const vector<Tile*> tiles) {
