@@ -13,9 +13,9 @@ using namespace std;
 class Game {
 
     // Default values
-    int C = 20; // Number of tiles (minimum of 5)
-    int S = 1; // Number of snake tiles
-    int L = 1; // Number of ladder tiles
+    int C = 30; // Number of tiles (minimum of 5)
+    int S = 3; // Number of snake tiles
+    int L = 3; // Number of ladder tiles
     int P = 3; // Snake penalty 
     int R = 3; // Ladder reward
     int PL = 2; // Number of players
@@ -79,48 +79,44 @@ void Game::playTurn(Board currentBoard) {
     Player &playing = players[turnNumber%PL];
 
     playing.setPosition(playing.getPosition() + rolled); // Moves the player the number of tiles indicated by the dice roll
-    if (playing.getPosition() >= C) {
-        playing.setPosition(C);
-        ended = true;
-    }
-    
-    cout << "checador1" << endl;
 
     Tile * currentTile = currentBoard.getTiles()[playing.getPosition()]; // Pointer to the tile landed on
-    char currentTileType = currentTile->getTileType(); // Saves type of the tile landed on
+    Tile &tileObject = * currentTile;
+    char currentTileType = 'N';
 
-    cout << "checador2" << endl;
+    cout << playing.getPosition() << endl;
+
+    if (playing.getPosition() < C) {
+        currentTileType = tileObject.getTileType();
+    }
 
     if (currentTileType == 'N' ) { // Landed on a normal tile
-        cout << turnNumber + 1 << " " << playing.getPlayerNum() << " " << playing.getPosition() - rolled + 1 << " " <<  rolled << " " << currentTileType << " " << playing.getPosition() + 1 << endl; // Normal turn output   
-        cout << "checadorN" << endl;   
+        if (playing.getPosition() <= C) {
+            cout << turnNumber + 1 << " " << playing.getPlayerNum() << " " << playing.getPosition() - rolled + 1 << " " <<  rolled << " " << currentTileType << " " << playing.getPosition() + 1 << endl; // Normal turn output  
+        }
+        else {
+            cout << turnNumber + 1 << " " << playing.getPlayerNum() << " " << playing.getPosition() - rolled + 1 << " " <<  rolled << " " << "N" << " " << 30 << endl; // Normal turn output  (winning)
+            cout << "Player " << playing.getPlayerNum() << " is the winner!!!" << endl; // Game Over by victory
+            ended = true;  
+        }
+         
     } 
     else if (currentTileType == 'S') { // Landed on a snake
         cout << turnNumber + 1 << " " << playing.getPlayerNum() << " " << playing.getPosition() - rolled + 1 << " " << rolled << " " << currentTileType << " " << playing.getPosition() - P + 1 << endl;
         playing.setPosition(playing.getPosition() - P); // Makes the player move P tiles back
-        cout << "checadorS" << endl;
     }
     else { // Landed on a ladder
         cout << turnNumber + 1 << " " << playing.getPlayerNum() << " " << playing.getPosition() - rolled + 1 << " " << rolled << " " << currentTileType << " " << playing.getPosition() + R + 1 << endl;
         playing.setPosition(playing.getPosition() + R); // Makes the player move R tiles forward
-        cout << "checadorL" << endl;
     }
 
-    cout << "checador3" << endl;
 
     turnNumber++;
-    if (ended) {
-        cout << "Player " << playing.getPlayerNum() << " is the winner!!!" << endl; // Game Over by victory
-    }
-
-    cout << "checador4" << endl;
-
     if (turnNumber >= T) {
         cout << "Maximum number of turns reached!!!" << endl; // Game Over by max turns
         ended = true;
     }
 
-    cout << "checador5" << endl;
 }
 
 
