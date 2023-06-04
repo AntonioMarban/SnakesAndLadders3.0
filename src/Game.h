@@ -106,7 +106,7 @@ void Game::playTurn(Board currentBoard) {
         }
          
     } 
-    else if (currentTileType == 'S') { // Landed on a snake
+    else if (currentTileType == 'S  ') { // Landed on a snake
         cout << turnNumber + 1 << " " << playing.getPlayerNum() << " " << playing.getPosition() - rolled + 1 << " " << rolled << " " << currentTileType << " " << playing.getPosition() - P + 1 << endl;
         playing.setPosition(playing.getPosition() - P); // Makes the player move P tiles back
     }
