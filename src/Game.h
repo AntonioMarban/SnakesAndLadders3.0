@@ -85,7 +85,8 @@ void Game::playTurn(Board currentBoard) {
     playing.setPosition(playing.getPosition() + rolled); // Moves the player the number of tiles indicated by the dice roll
 
     Tile * currentTile = currentBoard.getTiles()[playing.getPosition()]; // Pointer to the tile landed on
-    Tile &tileObject = * currentTile;
+    Tile & tileObject = * currentTile;
+
     char currentTileType = 'N';
 
     cout << playing.getPosition() << endl;
