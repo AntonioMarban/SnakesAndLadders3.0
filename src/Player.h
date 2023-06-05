@@ -22,6 +22,7 @@ public:
     void setPlayerNum(int);
     void setPosition(int);
     void printPlayer();
+    int operator+(int num) {return position + num;}
 };
 
 int Player::getPlayerNum() {

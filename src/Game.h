@@ -11,6 +11,7 @@
 #include "Snake.h"
 #include "Player.h"
 #include "Dice.h"
+#include "Turn.h"
 using namespace std;
 #pragma once
 
@@ -20,7 +21,7 @@ class Game {
     int C = 30; // Number of tiles (minimum of 5)
     int S = 3; // Number of snake tiles
     int L = 3; // Number of ladder tiles
-    int P = 3; // Snake penalty 
+    int P = -3; // Snake penalty 
     int R = 3; // Ladder reward
     int PL = 2; // Number of players
     int T = 100; // Maximum number of turns
@@ -89,29 +90,27 @@ void Game::playTurn(Board currentBoard) {
 
     char currentTileType = 'N';
 
-    cout << playing.getPosition() << endl;
-
     if (playing.getPosition() < C) {
         currentTileType = tileObject.getTileType();
     }
 
     if (currentTileType == 'N' ) { // Landed on a normal tile
         if (playing.getPosition() <= C) {
-            cout << turnNumber + 1 << " " << playing.getPlayerNum() << " " << playing.getPosition() - rolled + 1 << " " <<  rolled << " " << currentTileType << " " << playing.getPosition() + 1 << endl; // Normal turn output  
+            cout << Turn(turnNumber, playing.getPlayerNum(), rolled, currentTileType, playing.getPosition()) << endl;
         }
         else {
-            cout << turnNumber + 1 << " " << playing.getPlayerNum() << " " << playing.getPosition() - rolled + 1 << " " <<  rolled << " " << "N" << " " << 30 << endl; // Normal turn output  (winning)
+            cout << Turn(turnNumber, playing.getPlayerNum(), rolled, 'N', 30) << endl;
             cout << "Player " << playing.getPlayerNum() << " is the winner!!!" << endl; // Game Over by victory
             ended = true;  
         }
          
     } 
-    else if (currentTileType == 'S  ') { // Landed on a snake
-        cout << turnNumber + 1 << " " << playing.getPlayerNum() << " " << playing.getPosition() - rolled + 1 << " " << rolled << " " << currentTileType << " " << playing.getPosition() - P + 1 << endl;
+    else if (currentTileType == 'S') { // Landed on a snake
+        cout << Turn(turnNumber, playing.getPlayerNum(), rolled, currentTileType, playing + P) << endl;    // SOBRECARGA OPERADORES
         playing.setPosition(playing.getPosition() - P); // Makes the player move P tiles back
     }
     else { // Landed on a ladder
-        cout << turnNumber + 1 << " " << playing.getPlayerNum() << " " << playing.getPosition() - rolled + 1 << " " << rolled << " " << currentTileType << " " << playing.getPosition() + R + 1 << endl;
+        cout << Turn(turnNumber, playing.getPlayerNum(), rolled, currentTileType, playing + R) << endl;    // SOBRECARGA OPERADORES
         playing.setPosition(playing.getPosition() + R); // Makes the player move R tiles forward
     }
 
